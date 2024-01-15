@@ -1,0 +1,30 @@
+<h2 class="my-2">Experience Credentials</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th class="hide-sm">Title</th>
+      <th class="hide-sm">Years</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each exps}}
+      <tr>
+        <td>{{company}}</td>
+        <td class="hide-sm">Senior Developer</td>
+        <td class="hide-sm">
+          {{from}}
+          -
+          {{to}}
+        </td>
+        <td>
+          <button class="btn btn-danger">
+            Delete
+          </button>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
