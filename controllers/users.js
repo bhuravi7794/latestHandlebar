@@ -124,4 +124,17 @@ const registerUser =
       res.status(500).send("Server error");
     }
   });
-export { authenticateUser, getRegisterUser, registerUser };
+
+const getNavBar = (req, res) => {
+  res.render("auth/navbar", { navbar: navbarData });
+};
+const getFooter = (req, res) => {
+  res.render("auth/footer", { navbar: navbarData });
+};
+export {
+  authenticateUser,
+  getRegisterUser,
+  registerUser,
+  getNavBar,
+  getFooter,
+};
