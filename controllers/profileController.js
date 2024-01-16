@@ -1,8 +1,10 @@
 import { check, validationResult } from "express-validator";
 import normalizeUrl from "normalize-url";
 import Profile from "../models/ProfileModel.js";
+import UserModel from "../models/UsersModel.js";
 import checkObjectId from "../middleware/checkObjectId.js";
 import axios from "axios";
+import axiosObject from "../utils/axiosObject.js";
 
 const createProfile =
   (check("status", "Status is required").notEmpty(),
@@ -25,8 +27,6 @@ const createProfile =
       // spread the rest of the fields we don't need to check
       ...rest
     } = req.body;
-
-    console.log(req.body);
     // build a profile
     const profileFields = {
       user: req.user.id,
@@ -76,15 +76,34 @@ const getProfile = async (req, res) => {
     res.json(profile);
   } catch (err) {}
 };
+
+const getProfileData = async (eledata) => {
+  const profiles = await Profile.findOne({ user: eledata._id });
+  console.log("profile", profiles);
+};
 // should retrieve the all profiles.
-const getProfiles =
-  (checkObjectId("user_id"),
-  async ({ user: { user_id } }, res) => {
-    console.log(user_id);
-  });
+const getProfiles = async (req, res) => {
+  try {
+    const profileData = await Profile.find();
+    //const profileData = [];
+    // userData.forEach((ele) => {
+    //   const profiles = getProfileData(ele);
+    //   if (profiles) {
+    //     profileData.push(profiles);
+    //   }
+    //});
+    // res.json(profileData);
+    console.log(profileData);
+    res.render("profile/pages/profiles/allProfiles", {
+      profileData: profileData,
+    });
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).send("Server Error");
+  }
+};
 // to retrieve  profile on the basis of userid.
 const getProfileByUserId = async ({ params: { user_id } }, res) => {
-  console.log(user_id);
   res.json({ user_id });
 };
 const getProfileByGithub = async (req, res) => {
@@ -103,12 +122,29 @@ const getProfileByGithub = async (req, res) => {
     return res.status(404).json({ msg: "No Github profile found" });
   }
 };
+
+const getProfilePage = async (req, res) => {
+  const data = { user: req.user };
+  await axiosObject
+    .get("/profile/me", {
+      headers: { Cookie: `jwtToken=${req.cookies.jwtToken}` },
+    })
+    .then((response) => {
+      data.profile = response.data;
+    })
+    .catch((err) => {
+      data.profile = null;
+    });
+
+  res.render("profile/pages/profile", { profileData: data });
+};
 export {
   createProfile,
   getProfile,
   getProfiles,
   getProfileByUserId,
   getProfileByGithub,
+  getProfilePage,
 };
 
 // when we will delte the profile then user details should be deleted .

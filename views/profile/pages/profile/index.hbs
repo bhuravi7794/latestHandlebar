@@ -1,0 +1,17 @@
+<section class="container">
+  <a href="profiles.html" class="btn btn-light">Back To Profiles</a>
+
+  <div class="profile-grid my-1">
+    <!-- Top -->
+      <img
+        class="round-img my-1"
+        src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+        alt=""
+      />
+      {{> profile/top profileData=profileData}}
+      {{> profile/about profileData=profileData.profile}}
+      {{> profile/expDetails expData=profileData.profile.experience}}
+      {{> profile/eduDetails eduData=profileData.profile.education}}
+      {{> profile/github}}
+  </div>
+</section>

@@ -3,7 +3,7 @@ const getCurrentYear = () => {
   return new Date().getFullYear();
 };
 
-const formatDate = (date) => {
+const getFormatedDate = (date) => {
   return new Intl.DateTimeFormat().format(new Date(date));
 };
-export { getCurrentYear, formatDate };
+export { getCurrentYear, getFormatedDate };

@@ -18,6 +18,7 @@ import authRouter from "./routes/api/auth.js";
 import profileRouter from "./routes/api/profile.js";
 import cookieParser from "cookie-parser";
 import profileUIRouter from "./routes/profile.js";
+import loginRouter from "./routes/api/login.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 console.log(__dirname);
@@ -53,6 +54,7 @@ app.set("views", join(__dirname, "views"));
 // routes
 
 app.use("/", homeRouter);
+app.use("/login", loginRouter);
 app.use("/api/profile", profileRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);

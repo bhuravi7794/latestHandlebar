@@ -9,6 +9,10 @@ import {
   addExperience,
   createProfile,
 } from "../controllers/profileCreateController.js";
+import {
+  getProfilePage,
+  getProfiles,
+} from "../controllers/profileController.js";
 
 const profileUIRouter = express.Router();
 profileUIRouter.get("/create", (req, res) => {
@@ -25,5 +29,8 @@ profileUIRouter.get("/addEducation", authenticate, (req, res) => {
 
 profileUIRouter.post("/addEducation", authenticate, addEducation);
 profileUIRouter.post("/create", authenticate, createProfile);
+
+profileUIRouter.get("/profile", authenticate, getProfilePage);
+profileUIRouter.get("/allProfiles", authenticate, getProfiles);
 
 export default profileUIRouter;

@@ -25,6 +25,8 @@ const experienceData = {
 
 const dashboardData = {
   delete: "Delete My Account",
+  profile: null,
+  createProfile: "Create Profile",
 };
 
 export { actionData, educationData, experienceData, dashboardData };

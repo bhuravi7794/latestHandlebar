@@ -20,7 +20,6 @@ dashboardrouter.get("", authenticate, async (req, res) => {
       headers: { Cookie: `jwtToken=${req.cookies.jwtToken}` },
     })
     .then((response) => {
-      console.log(response.data);
       data.profile = response.data;
     })
     .catch((err) => {
@@ -28,7 +27,7 @@ dashboardrouter.get("", authenticate, async (req, res) => {
       data.profile = null;
     });
 
-  console.log(data.profile.education);
+  //console.log(data.profile.education);
   console.log(user.name + "user data");
   res.render("dashboard/dashboard", {
     dashboard: data,

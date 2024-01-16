@@ -25,8 +25,6 @@ const createProfile =
       // spread the rest of the fields we don't need to check
       ...rest
     } = req.body;
-
-    console.log(req.body);
     // build a profile
     const profileFields = {
       user: req.user.id,
@@ -70,7 +68,6 @@ const getProfileByUserId = async ({ params: { user_id } }, res) => {
     if (!profile) {
       return res.status(400).json({ msg: "There is no profile" });
     }
-    console.log("Profile", profile);
     res.json(profile);
   } catch (err) {
     console.error(err.message);
@@ -89,13 +86,11 @@ const addExperience =
 
     try {
       // Using upsert option (creates new doc if no match is found):
-      console.log({ user: req.user.id });
       let profile = await Profile.findOne({ user: req.user.id });
-      console.log(profile);
       if (profile) {
         profile.experience.unshift(req.body);
         await profile.save();
-        return res.json(profile);
+        res.redirect("/dashboard");
       }
     } catch (err) {
       console.error(err.message);
@@ -112,14 +107,13 @@ const addEducation =
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    console.log(req.body);
     try {
       // Using upsert option (creates new doc if no match is found):
       let profile = await Profile.findOne({ user: req.user.id });
       if (profile) {
         profile.education.unshift(req.body);
         await profile.save();
-        return res.json(profile);
+        res.redirect("/dashboard");
       }
     } catch (err) {
       console.error(err.message);
