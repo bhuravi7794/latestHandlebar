@@ -16,6 +16,7 @@
     "axios": "^1.6.5",
     "bcrypt-nodejs": "0.0.3",
     "bcryptjs": "^2.4.3",
+    "chai": "^5.0.0",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^5.1.0",
     "cookie-parser": "^1.4.6",
@@ -33,6 +34,7 @@
     "handlebars-helpers": "^0.10.0",
     "hbs": "^4.2.0",
     "jsonwebtoken": "^9.0.2",
+    "mocha": "^10.2.0",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.3",
     "morgan": "^1.10.0",
@@ -41,7 +43,8 @@
     "passport-local": "^1.0.0",
     "promptpay-qr": "^0.5.0",
     "qrcode": "^1.5.3",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "supertest": "^6.3.4"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"
